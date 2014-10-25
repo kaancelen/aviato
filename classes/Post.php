@@ -39,6 +39,12 @@ class Post{
 			throw new Exception("Post#create");
 		}
 	}
+	#upload file to server and return new file location
+	public static function uploadFile($file_temp, $file_extn, $username){
+		$file_path = 'aviato_media/'.$username.'/'.substr(md5(time()), 0, 10).'.'.$file_extn;
+		move_uploaded_file($file_temp, $file_path);
+		return $file_path;
+	}
 }
 
 ?>

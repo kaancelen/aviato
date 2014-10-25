@@ -12,8 +12,8 @@ if(Input::exists() && Token::check(Input::get('token'))){
 	#handle profile picture first quickly
 	#if profile picture has and file is not empty then upload and set it
 	if(isset($_FILES['profile_picture']) === true && empty($_FILES['profile_picture']['name']) !== true){ 
-		$allowed = array('jpg', 'jpeg', 'gif', 'png'); #allowed types
-		$max_file_size = 500000;	//allowed max file size
+		$allowed = Allowed::allowedTypesForProfilePictures(); #allowed types
+		$max_file_size = Allowed::maxFileSizeForProfilePictures();	//allowed max file size
 		$file_name = $_FILES['profile_picture']['name'];#get filename
 		$file_temp = $_FILES['profile_picture']['tmp_name'];#get file temp path
 		$file_size = $_FILES['profile_picture']['size'];#get file size
