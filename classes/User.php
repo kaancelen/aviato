@@ -20,6 +20,7 @@ class User{
 					$this->_isLoggedIn = true;
 				}else{
 					//process log out
+					$this->logout();
 				}
 			}
 		} else {

@@ -40,6 +40,7 @@
 					echo "<li><a href='register.php'>Register</a></li>";
 					echo "<li><a href='login.php'>Log in</a></li>";
 				}else{ #if logged in
+					echo "<li><a href='add_post.php'>Share</li>";
 					echo "<li class='dropdown'>";
 					echo	"<a href='#'' class='dropdown-toggle' data-toggle='dropdown'>{$user->data()->username} <span class='caret'></span></a>";
 					echo	"<ul class='dropdown-menu' role='menu'>";

@@ -14,7 +14,7 @@ if(Session::exists('index')){
 		}else{
 			echo "<h2>Hello {$user->data()->username} </h2>";
 			echo '<p>Share something now!</p>';
-			echo '<p><a href="#" class="btn btn-primary btn-lg" role="button">Share</a></p>';
+			echo '<p><a href="add_post.php" class="btn btn-primary btn-lg" role="button">Share</a></p>';
 		}
 	?>
 </div>
