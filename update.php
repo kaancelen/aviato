@@ -7,13 +7,14 @@ if(!$user->isLoggedIn()){
 $userProfile = new usersProfile();
 $userProfile->find($user->data()->id);#get this user profile datas
 
+$allowed = Allowed::allowedTypesForProfilePictures(); #allowed types
+$max_file_size = Allowed::maxFileSizeForProfilePictures();	//allowed max file size
+
 #if input exists and token is ok
 if(Input::exists() && Token::check(Input::get('token'))){
 	#handle profile picture first quickly
 	#if profile picture has and file is not empty then upload and set it
 	if(isset($_FILES['profile_picture']) === true && empty($_FILES['profile_picture']['name']) !== true){ 
-		$allowed = Allowed::allowedTypesForProfilePictures(); #allowed types
-		$max_file_size = Allowed::maxFileSizeForProfilePictures();	//allowed max file size
 		$file_name = $_FILES['profile_picture']['name'];#get filename
 		$file_temp = $_FILES['profile_picture']['tmp_name'];#get file temp path
 		$file_size = $_FILES['profile_picture']['size'];#get file size
@@ -87,6 +88,7 @@ if(Input::exists() && Token::check(Input::get('token'))){
 	<form action="" method="post" class="form-signin" role="form" enctype="multipart/form-data">
 		<img src='<?php echo $userProfile->data()->profile_picture ?>' alt='<?php echo $user->data()->username ?>' width="50%" height="%50">
 		<input type="file" name="profile_picture" class="btn btn-default">
+		<p>Allowed types (<?php echo implode(", ", $allowed)?>)<br>Max file size (<?php echo $max_file_size/Allowed::MB().'MB' ?>)</p>
 
 		<h3 class="form-signin-heading">Change E-Mail</h3>
 		<input type="text" class="form-control" name="email" id="email" placeholder="<?php echo escape($user->data()->email); ?>" value="<?php echo escape(Input::get('email')); ?>">

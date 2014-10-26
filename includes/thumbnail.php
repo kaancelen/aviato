@@ -10,6 +10,7 @@ echo '<div class="thumbnail custom_thumbnail">';#thumbnail aç
 	}
 	echo '</p>';#close tag list
 	echo "<p>";#open operations list
+	echo "<a href='#'> <span class='glyphicon glyphicon-cloud-download'></span> </a>";#download icon
 	echo "<a href='post_page.php?id={$current_post->id}'> <span class='glyphicon glyphicon-fullscreen'></span> </a>";#maximize
 	$temp_post_owner = new User($current_post->user_id);#get post owner
 	if($temp_post_owner->data()->id === $user->data()->id){ # if post owner is the logged in user

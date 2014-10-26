@@ -10,13 +10,14 @@ if(!$post->exist($post_id)){#if DB dont have this record than redirect to 404.ph
 if(!$post->isBelong($post_id, $user_id)){#if DB have record but not belongs given user_id redirect to 403.php
 	Redirect::to('includes/errors/403.php');
 }
+
+$allowed = Allowed::allowedTypesForShare(); #allowed types
+$max_file_size = Allowed::maxFileSizeForShare();
 #if input exists and token correct
 if(Input::exists() && Token::check(Input::get('token'))){
 	#handle new media quickly
 	#if media uploaded then upload it and update DB
 	if(isset($_FILES['media_url']) === true && empty($_FILES['media_url']['name']) !== true){
-		$allowed = Allowed::allowedTypesForShare(); #allowed types
-		$max_file_size = Allowed::maxFileSizeForShare();
 		$file_name = $_FILES['media_url']['name'];#get filename
 		$file_temp = $_FILES['media_url']['tmp_name'];#get file temp path
 		$file_type = mime_content_type($file_temp);#get file type
@@ -74,7 +75,9 @@ if(Input::exists() && Token::check(Input::get('token'))){
 
 <div class="container" style="width:40%">
 	<form action="" method="post" class="form-signin" role="form" enctype="multipart/form-data">
-		<input type="file" name="media_url" class="btn btn-default">
+		<embed src="<?php echo $post->data()->media_url ?>" autostart='0' type="<?php echo $post->data()->mime_type ?>" class='custom_update_media'>
+		<input type="file" name="media_url" class="btn btn-default" >
+		<p>Allowed types (<?php echo implode(", ", $allowed)?>)<br>Max file size (<?php echo $max_file_size/Allowed::MB().'MB' ?>)</p>
 
 		<h3>Name</h3>
 		<input type="text" class="form-control" name="name" id="name" placeholder="<?php echo escape($post->data()->name); ?>" autocomplete="off">

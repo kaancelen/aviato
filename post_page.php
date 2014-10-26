@@ -12,13 +12,7 @@ $post_owner = new User($post->data()->user_id);
 	<table>
 		<tr>
 			<td align="center">
-				<h3><?php echo $post->data()->name ?> 
-					<?php 
-						if($user->data()->id === $post_owner->data()->id){#if this user is post owner then show edit button
-							echo "<a href='update_post.php?id={$post->data()->id}'><span class='glyphicon glyphicon-edit'></span></a>";
-						}
-					?>
-				</h3>
+				<h3><?php echo $post->data()->name ?></h3>
 				<p><?php echo $post->data()->desc ?></p>
 				<?php #tags
 					echo '<p>';#open tag list
@@ -28,6 +22,12 @@ $post_owner = new User($post->data()->user_id);
 					echo '</p>';#close tag list
 				?>
 				<p>Belongs to <a href="profile.php?user=<?php echo $post_owner->data()->id ?>"><span class="label label-info"><?php echo $post_owner->data()->username ?></span></a></p>
+				<?php 
+						if($user->data()->id === $post_owner->data()->id){#if this user is post owner then show edit button
+							echo "<p><a href='update_post.php?id={$post->data()->id}'> <span class='glyphicon glyphicon-edit'></span> Edit</a></p>";
+						}
+				?>
+				<p><a href="#"> <span class='glyphicon glyphicon-cloud-download'></span> Download</a></p>
 			</td>
 			<td>
 				<embed src=<?php echo $post->data()->media_url ?> autostart='0' type=<?php echo $post->data()->mime_type ?> class="custom_embed_document">
