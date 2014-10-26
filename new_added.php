@@ -4,14 +4,15 @@ if(!$user->isLoggedIn()){
 	Session::flash('index', "Please log in!");
 	Redirect::to('index.php');
 }
+$numberOfPost = 30;
 $post = new Post();
-$posts = $post->getPostsOfUser($user->data()->id);
+$posts = $post->getAll(1, $numberOfPost);#get $numberOfPost post according to sorted created_date
 ?>
 
 <div align="center">
 <?php
 	if(empty($posts)){
-		echo '<h2>You do not have any post <a href="add_post.php"><span class="label label-primary">Share it</span></a> now!</h2>';
+		echo '<h2>We do not have any new post, can you <a href="add_post.php"><span class="label label-primary">Share it</span></a> now?</h2>';
 	}else{
 		$row_number = (count($posts) / 3) + 1;
 		for($i = 1; $i <= $row_number; $i++){
@@ -29,6 +30,7 @@ $posts = $post->getPostsOfUser($user->data()->id);
 		}
 	}
 ?>
+
 <?php
 include('includes/footer.php');
 ?>

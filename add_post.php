@@ -1,6 +1,7 @@
 <?php
 include('includes/header.php');
 if(!$user->isLoggedIn()){
+	Session::flash('index', "Please log in!");
 	Redirect::to('index.php');
 }
 
@@ -14,7 +15,7 @@ if(Input::exists() && Token::check(Input::get('token'))){
 			'min' => 2,
 			'max' => 127
 		),
-		'desc' => array(
+		'detail' => array(
 			'required' => true,
 			'min' => 2,
 			'max' => 255
@@ -67,7 +68,7 @@ if(Input::exists() && Token::check(Input::get('token'))){
 		$post->create(array(
 			'user_id' => $user->data()->id,
 			'name' => Input::get('name'),
-			'desc' => Input::get('desc'),
+			'detail' => Input::get('detail'),
 			'media_url' => $media_url,
 			'mime_type' => $file_type,
 			'tags' => TagUtils::fixTagsForSystem(Input::get('tags'))
@@ -87,7 +88,7 @@ if(Input::exists() && Token::check(Input::get('token'))){
 		<input type="text" class="form-control" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" autocomplete="off">
 
 		<h3>Description</h3>
-		<input type="textArea" class="form-control" name="desc" id="desc" value="<?php echo escape(Input::get('desc')); ?>" autocomplete="off">
+		<input type="textArea" class="form-control" name="detail" id="detail" value="<?php echo escape(Input::get('detail')); ?>" autocomplete="off">
 
 		<h3>Tags</h3>
 		<input type="textArea" class="form-control" name="tags" id="tags" value="<?php echo escape(TagUtils::fixTagsForSystem(Input::get('tags'))); ?>" autocomplete="off">

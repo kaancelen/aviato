@@ -17,7 +17,7 @@
 			if($user->isLoggedIn()){//if logged in
 		?>
 		<ul class="nav navbar-nav">
-			<li><a href="#">New Added</a></li>
+			<li><a href="new_added.php">New Added</a></li>
 			<li><a href="#">Most Rated</a></li>
 			<?php
 				if($user->hasPermission('admin')){

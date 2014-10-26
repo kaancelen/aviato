@@ -44,6 +44,25 @@ class Post{
 		}
 		return false;
 	}
+	/**
+	* return $number post object in DB according to $type
+	* $type = 0, return $number not sort
+	* $type = 1, return $number, sort newest to oldest
+	* $type = 2, return $number, sort according to total_rating
+	*/
+	public function getAll($type = 0, $number){
+		if($type < 3){
+			switch ($type) {
+				case 0:
+					break;
+				case 1:
+					return $this->getOrderByCreatedDate($number);
+				case 2:
+					break;
+			}
+		}
+		return false;
+	}
 	#create User object in Database
 	public function create($fields = array()){
 		if(!$this->_db->insert('posts', $fields)){
@@ -61,6 +80,15 @@ class Post{
 		$file_path = 'aviato_media/'.$username.'/'.substr(md5(time()), 0, 10).'.'.$file_extn;
 		move_uploaded_file($file_temp, $file_path);
 		return $file_path;
+	}
+	#return all post desc order by created_date
+	private function getOrderByCreatedDate($number){
+		$sql = $sql = "SELECT * FROM posts ORDER BY `posts`.`created_date` DESC";
+		$query_result = $this->_db->query($sql);
+		if(!$query_result->error() && $query_result->count()){ #if query_result don't have error
+			return $query_result->getNumberOfResults($number);
+		}
+		return false;
 	}
 }
 

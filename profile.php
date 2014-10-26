@@ -1,6 +1,9 @@
 <?php
 include('includes/header.php');
-
+if(!$user->isLoggedIn()){
+	Session::flash('index', "Please log in!");
+	Redirect::to('index.php');
+}
 if(!$username = Input::get('user')){
 	Redirect::to('index.php');
 }else{
@@ -8,7 +11,7 @@ if(!$username = Input::get('user')){
 	$userProfile = new UsersProfile();
 	$userProfile->find($user->data()->id);#get user profile info from db
 	if(!$user->exists()){
-		Redirect::to(404);//if user not exists
+		Redirect::to('includes/errors/404.php');//if user not exists
 	}else{
 		$data = $user->data();
 	}

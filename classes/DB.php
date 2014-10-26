@@ -116,7 +116,6 @@ class DB{
 		}
 
 		$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
-		
 		if(!$this->query($sql, $fields)->error()){
 			return true;
 		}
@@ -142,6 +141,10 @@ class DB{
 	#count of last query result set element number
 	public function count(){
 		return $this->_count;
+	}
+	#return first $number result
+	public function getNumberOfResults($number = 0){
+		return array_slice($this->results(), 0, $number);
 	}
 }
 ?>

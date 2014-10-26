@@ -2,6 +2,7 @@
 include('includes/header.php');
 
 if(!$user->isLoggedIn()){
+	Session::flash('index', "Please log in!");
 	Redirect::to('index.php');
 }
 if(Input::exists()){
