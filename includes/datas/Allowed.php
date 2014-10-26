@@ -5,7 +5,7 @@ class Allowed{
 	}
 
 	public static function maxFileSizeForProfilePictures(){
-		return 500000;
+		return 1000000;//1mb
 	}
 
 	public static function allowedTypesForShare(){
@@ -13,7 +13,11 @@ class Allowed{
 	}
 
 	public static function maxFileSizeForShare(){
-		return 1000000000;
+		return 1000000;//1mb
+	}
+	
+	public static function MB(){
+		return 1000000;//megabayt
 	}
 }
 ?>

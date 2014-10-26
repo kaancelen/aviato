@@ -3,6 +3,7 @@ include('includes/header.php');
 if(!$user->isLoggedIn()){
 	Redirect::to('index.php');
 }
+
 #if input exists and token is ok
 if(Input::exists() && Token::check(Input::get('token'))){
 	#First validate other fields validate and upload file last
@@ -27,18 +28,19 @@ if(Input::exists() && Token::check(Input::get('token'))){
 	#vaidation flag
 	$isValidFlag = true;
 	#Get file features and validate it, if not isValidFlag will be false
-	if(isset($_FILES['media_url']) && !empty($_FILES['media_url']['name'])){
+	if(isset($_FILES['media_url']) === true && empty($_FILES['media_url']['name']) !== true){
 		$allowed = Allowed::allowedTypesForShare(); #allowed types
 		$max_file_size = Allowed::maxFileSizeForShare();
 		$file_name = $_FILES['media_url']['name'];#get filename
 		$file_temp = $_FILES['media_url']['tmp_name'];#get file temp path
+		$file_type = mime_content_type($file_temp);#get file type
 		$file_size = $_FILES['media_url']['size'];#get file size
 		$temp = explode('.', $_FILES['media_url']['name']);
 		$file_extn = strtolower(end($temp));#get file extension
 
 		if($file_size > $max_file_size){#if file size too big
 			$isValidFlag = false;
-			echo '<div class="alert alert-warning" role="alert">File is too big. Max: '.$max_file_size.'</div>';
+			echo '<div class="alert alert-warning" role="alert">File is too big. Max: '.$max_file_size/Allowed::MB().'MB</div>';
 		}
 		if(in_array($file_extn, $allowed) === false){#if file extension not allowed
 			$isValidFlag = false;
@@ -67,6 +69,7 @@ if(Input::exists() && Token::check(Input::get('token'))){
 			'name' => Input::get('name'),
 			'desc' => Input::get('desc'),
 			'media_url' => $media_url,
+			'mime_type' => $file_type,
 			'tags' => TagUtils::fixTagsForSystem(Input::get('tags'))
 		));
 		//Redirect to index

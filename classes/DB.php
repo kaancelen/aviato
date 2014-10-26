@@ -131,6 +131,10 @@ class DB{
 	public function first(){
 		return $this->results()[0];
 	}
+	#all result of last query
+	public function all(){
+		return $this->results();
+	}
 	#return last error
 	public function error(){
 		return $this->_error;

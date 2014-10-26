@@ -1,0 +1,12 @@
+.custom_thumbnail_media{
+	width: 300px;
+	height: 300px;
+}
+.custom_thumbnail{
+	width: 400px;
+}
+.custom_embed_document{
+	width: 900px;
+	height: 600px;
+	margin-left: 100px;
+}

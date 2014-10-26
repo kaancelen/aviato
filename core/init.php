@@ -25,6 +25,7 @@ spl_autoload_register(function($class){
 
 require_once 'functions/sanitize.php';
 require_once 'functions/TagUtils.php';
+require_once 'functions/FileUtils.php';
 require_once 'includes/datas/Country.php';
 require_once 'includes/datas/Allowed.php';
 

@@ -20,11 +20,16 @@ if(Input::exists() && Token::check(Input::get('token'))){
 		$temp = explode('.', $_FILES['profile_picture']['name']);
 		$file_extn = strtolower(end($temp));#get file extension
 
+		$isFileOk = true;
 		if($file_size > $max_file_size){
-			echo '<div class="alert alert-warning" role="alert">File is too big. Max: '.$max_file_size.'</div>';
-		}else if(in_array($file_extn, $allowed) === false){
+			$isFileOk = false;
+			echo '<div class="alert alert-warning" role="alert">File is too big. Max: '.$max_file_size/Allowed::MB().'MB</div>';
+		}
+		if(in_array($file_extn, $allowed) === false){
+			$isFileOk = false;
 			echo '<div class="alert alert-warning" role="alert">Incorrect file type. Allowed: '.implode(', ', $allowed).'</div>';
-		}else{
+		}
+		if($isFileOk){
 			$uploaded_file_path = UsersProfile::uploadFile($file_temp, $file_extn);#upload file
 			$userProfile->update($userProfile->data()->id, array('profile_picture' => $uploaded_file_path));#update DB
 			echo '<div class="alert alert-success" role="alert">Profile picture changed</div>';

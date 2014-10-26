@@ -5,7 +5,13 @@ class TagUtils{
 	*	and make lower case all and return it
 	*/
 	public static function fixTagsForSystem($tags){
-		return $tags;
+		return str_replace(" ", "", strtolower($tags));
+	}
+	/**
+	* return tag array of given tag string
+	*/
+	public static function tagArray($tags){
+		return explode(',', $tags);
 	}
 }
 ?>
