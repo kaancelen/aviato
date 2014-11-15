@@ -19,9 +19,13 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 		<!-- Custom my css -->
 		<link rel="stylesheet" href="css/main.css">
+		<!-- Star rating css -->
+		<link href="kartik/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
 		<!-- Latest compiled and minified JavaScript .js import order is important-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<!-- Star rating JS -->
+		<script src="kartik/js/star-rating.min.js" type="text/javascript"></script>
 	</head>
 	<body style="padding-top:70px;background:url('images/bg.png') repeat;">
 	<?php include('includes/navigationBar.php'); ?>

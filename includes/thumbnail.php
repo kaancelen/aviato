@@ -15,6 +15,8 @@ echo '<div class="thumbnail custom_thumbnail">';#thumbnail aç
 	$temp_post_owner = new User($current_post->user_id);#get post owner
 	if($temp_post_owner->data()->id === $user->data()->id){ # if post owner is the logged in user
 		echo "<a href='update_post.php?id={$current_post->id}'> <span class='glyphicon glyphicon-edit'></span> </a>";
+	}else{
+		echo "<p><input id='star_rating' class='rating' data-size='xs' min='1' max='10' step='1' data-show-clear='false' data-show-caption='false'></p>";
 	}
 	echo "</p>";#close operations list
 echo '</div>';#thumbnail kapa

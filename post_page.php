@@ -33,6 +33,9 @@ $post_owner = new User($post->data()->user_id);
 						}
 				?>
 				<p><a href="download.php?file=<?php echo $post->data()->media_url ?>" target="_blank"> <span class='glyphicon glyphicon-cloud-download'></span> Download</a></p>
+				<?php if($user->data()->id != $post_owner->data()->id){ ?>
+					<p><input id="star_rating" class="rating" data-size="xs" min="1" max="10" step="1" data-show-clear="false" data-show-caption="false"></p>
+				<?php } ?>
 			</td>
 			<td>
 				<embed src=<?php echo $post->data()->media_url ?> autostart='0' type=<?php echo $post->data()->mime_type ?> class="custom_embed_document">
