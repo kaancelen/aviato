@@ -81,6 +81,20 @@ class Post{
 		move_uploaded_file($file_temp, $file_path);
 		return $file_path;
 	}
+	#return posts that contains given tag
+	public function findPostsByTag($tag){
+		if($tag){
+			$sql = "SELECT * FROM posts WHERE tags LIKE '%".$tag."%'";//TODO ? not working
+			$query_result = $this->_db->query($sql, array($tag)); #replace ?
+			if(!$query_result->error()){ #if query_result don't have error
+				if($query_result->count()){#and query result have more than 0 row
+					$this->_data = $query_result->first();#assign first one to _data
+					return $query_result->getNumberOfResults(30);//return first 30
+				}
+			}
+		}
+		return array();
+	}
 	#return all post desc order by created_date
 	private function getOrderByCreatedDate($number){
 		$sql = $sql = "SELECT * FROM posts ORDER BY `posts`.`created_date` DESC";

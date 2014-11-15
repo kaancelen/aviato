@@ -25,9 +25,9 @@
 				}
 			?>
 		</ul>
-		<form class="navbar-form navbar-left" role="search">
+		<form class="navbar-form navbar-left" role="search" action="search.php" method="post">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" class="form-control" name="tags" id="tags" placeholder="Search" autocomplete="off">
 			</div>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
