@@ -12,12 +12,15 @@ echo '<div class="thumbnail custom_thumbnail">';#thumbnail aç
 	echo "<p>";#open operations list
 	echo "<a href='download.php?file={$current_post->media_url}' target='_blank'> <span class='glyphicon glyphicon-cloud-download'></span> </a>";#download icon
 	echo "<a href='post_page.php?id={$current_post->id}'> <span class='glyphicon glyphicon-fullscreen'></span> </a>";#maximize
-	$temp_post_owner = new User($current_post->user_id);#get post owner
-	if($temp_post_owner->data()->id === $user->data()->id){ # if post owner is the logged in user
+	if($current_post->user_id === $user->data()->id){ # if post owner is the logged in user
 		echo "<a href='update_post.php?id={$current_post->id}'> <span class='glyphicon glyphicon-edit'></span> </a>";
-	}else{
-		echo "<p><input id='star_rating' class='rating' data-size='xs' min='1' max='10' step='1' data-show-clear='false' data-show-caption='false'></p>";
 	}
-	echo "</p>";#close operations list
-echo '</div>';#thumbnail kapa
-?>
+	$rating_average = ($current_post->rating_number==0?0:($current_post->total_rating / $current_post->rating_number));
+	?>
+		<p><input id='star_rating' name='star_rating' class='rating' 
+			data-size='xs' min='1' max='5' step='0.5' data-show-clear='false' data-show-caption='false'
+			onchange='onChangeRating(<?php echo $current_post->id ?>, value)' value='<?php echo $rating_average ?>'
+			data-readonly = '<?php echo ($current_post->user_id === $user->data()->id) ?>'>
+		</p>
+	</p>
+</div>

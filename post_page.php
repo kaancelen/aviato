@@ -33,9 +33,11 @@ $post_owner = new User($post->data()->user_id);
 						}
 				?>
 				<p><a href="download.php?file=<?php echo $post->data()->media_url ?>" target="_blank"> <span class='glyphicon glyphicon-cloud-download'></span> Download</a></p>
-				<?php if($user->data()->id != $post_owner->data()->id){ ?>
-					<p><input id="star_rating" class="rating" data-size="xs" min="1" max="10" step="1" data-show-clear="false" data-show-caption="false"></p>
-				<?php } ?>
+				<?php $rating_average = ($post->data()->rating_number==0?0:($post->data()->total_rating / $post->data()->rating_number)); ?>
+				<p><input id="star_rating" name="star_rating" class="rating" 
+						data-size="xs" min="1" max="5" step="0.5" data-show-clear="false" data-show-caption="false"
+						onchange="onChangeRating(<?php echo $post->data()->id ?>, value)" value="<?php echo $rating_average ?>"
+						data-readonly="<?php echo ($user->data()->id === $post_owner->data()->id) ?>"></p>
 			</td>
 			<td>
 				<embed src=<?php echo $post->data()->media_url ?> autostart='0' type=<?php echo $post->data()->mime_type ?> class="custom_embed_document">

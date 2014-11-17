@@ -14,3 +14,7 @@
 	width: 550px;
 	height: 300px;
 }
+.rating{ /*TODO star rating renklerini değiştirmeye çalış*/
+	background-color: #0f0;
+	color : #0f0;
+}
