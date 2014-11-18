@@ -7,6 +7,9 @@ class Rating{
 	public function __construct(){
 		$this->_db = DB::getInstance();
 	}
+	public function data(){
+		return $this->_data;
+	}
 	/**
 	* Check if this post rating exist, if it is return true
 	* and set $_data, else return false

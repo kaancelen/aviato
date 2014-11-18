@@ -33,7 +33,13 @@ $post_owner = new User($post->data()->user_id);
 						}
 				?>
 				<p><a href="download.php?file=<?php echo $post->data()->media_url ?>" target="_blank"> <span class='glyphicon glyphicon-cloud-download'></span> Download</a></p>
-				<?php $rating_average = ($post->data()->rating_number==0?0:($post->data()->total_rating / $post->data()->rating_number)); ?>
+				<?php 
+					$rating_average = ($post->data()->rating_number==0?0:($post->data()->total_rating / $post->data()->rating_number)); 
+					$rating_record = new Rating();
+					if($rating_record->exists($user->data()->id, $post->data()->id)){//if logged in user rate this post
+						echo "<span class='badge' id='user_rate'>{$rating_record->data()->rate}</span>";
+					}
+				?>
 				<p><input id="star_rating" name="star_rating" class="rating" 
 						data-size="xs" min="1" max="5" step="0.5" data-show-clear="false" data-show-caption="false"
 						onchange="onChangeRating(<?php echo $post->data()->id ?>, value)" value="<?php echo $rating_average ?>"

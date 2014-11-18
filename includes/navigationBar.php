@@ -18,7 +18,7 @@
 		?>
 		<ul class="nav navbar-nav">
 			<li><a href="new_added.php">New Added</a></li>
-			<li><a href="#">Most Rated</a></li>
+			<li><a href="most_rated.php">Most Rated</a></li>
 			<?php
 				if($user->hasPermission('admin')){
 					echo "<li><a href='#'>Users</a></li>";

@@ -58,7 +58,7 @@ class Post{
 				case 1:
 					return $this->getOrderByCreatedDate($number);
 				case 2:
-					break;
+					return $this->getOrderByRating($number);
 			}
 		}
 		return false;
@@ -98,6 +98,15 @@ class Post{
 	#return all post desc order by created_date
 	private function getOrderByCreatedDate($number){
 		$sql = $sql = "SELECT * FROM posts ORDER BY `posts`.`created_date` DESC";
+		$query_result = $this->_db->query($sql);
+		if(!$query_result->error() && $query_result->count()){ #if query_result don't have error
+			return $query_result->getNumberOfResults($number);
+		}
+		return false;
+	}
+	#return all post desc order by rating
+	private function getOrderByRating($number){
+		$sql = $sql = "SELECT * FROM posts ORDER BY `posts`.`total_rating` DESC";
 		$query_result = $this->_db->query($sql);
 		if(!$query_result->error() && $query_result->count()){ #if query_result don't have error
 			return $query_result->getNumberOfResults($number);
