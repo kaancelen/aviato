@@ -70,6 +70,8 @@ if(Input::exists() && Token::check(Input::get('token'))){
 			'name' => Input::get('name'),
 			'detail' => Input::get('detail'),
 			'media_url' => $media_url,
+			'created_date' => date("Y-m-d H:i:s"),
+			'updated_date' => date("Y-m-d H:i:s"),
 			'mime_type' => $file_type,
 			'tags' => TagUtils::fixTagsForSystem(Input::get('tags'))
 		));
