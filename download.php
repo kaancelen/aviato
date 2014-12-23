@@ -5,8 +5,7 @@ set_time_limit(0); // disable the time limit for this script
 $file_path = $_GET['file'];
 if(file_exists($file_path)){
 	#get file infos
-	$file_temp = $_FILES['media_url']['tmp_name'];#get file temp path
-	$file_type = mime_content_type($file_temp);#get file type
+	$file_type = mime_content_type($file_path);#get file type
 	$file_size = filesize($file_path);
 	$file_basename = basename($file_path);
 	#set file infos
@@ -17,7 +16,8 @@ if(file_exists($file_path)){
     header("Cache-Control: must-revalidate");
     header("Pragma: public");
     header("Content-Length: {$file_size}");
-    readfile($file);
+    readfile($file_path);
 	exit;
 }
+
 ?>
